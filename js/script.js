@@ -76,10 +76,12 @@ $(document).ready(function() {
 	$('input[type=file]').change(function(e){
 	  var ext = $('input[type=file]').val().split('.').pop().toLowerCase();
 	  if($.inArray(ext, ['pptx', 'ppt']) == -1) {
-	    	alert('invalid extension!');
+	    	$('#error-upload-modal').modal('show');
 	    	setTimeout(function(){
 	    	  $('input[type=file]').val('');
 	    	}, 500);
+	  } else{
+
 	  }
 	  
 	  

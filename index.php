@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12 text-center"><img src="images/think-tank-small.png" class="img-responsive text-center" alt="" style="margin: 0 auto;"></div>
-                        <form class="form-horizontal" name="thinkTank" id="thinkTank" style="color:#fff;">
+                        <form class="form-horizontal" name="thinkTank" id="thinkTank" style="color:#fff;" enctype="mulitpart/form-data">
                             <div class="col-md-8 text-right" style="margin-top:20px;">
                             
                                 <div class="form-group" style="color:#fff;">
@@ -154,21 +154,12 @@
                 <h1 class="modal-title text-center">Submission Confirmed!</h1>
               </div>
               <div class="modal-body text-center" id="loading-modal-body">
-                <h2 class="" style="color: #46beaa;">Sending To Think Tank</h2>
+                <h2 class="" style="color: #46beaa;">Sending To Think Tank</h2>                   
                 
-                   <div class="row" style="margin: 0px 5px;">
-                        <div class="progress">
-                          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                            <span class="percent">Complete</span>
-                          </div>
-                        </div>
-                   </div>
-                           
-                
-                <!--<div id="movingBallG">
+                <div id="movingBallG">
                     <div class="movingBallLineG"></div>
                     <div id="movingBallG_1" class="movingBallG"></div>
-                </div>-->
+                </div>
               </div>  
               <div class="modal-body" id="success-modal-body">
                 <h2 class="text-center"><i class="fa fa-check-circle fa-4x green" aria-hidden="true"></i></h2>
@@ -182,24 +173,24 @@
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="error-upload-modal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header" id="error-upload-modal-header">                
-                <h1 class="modal-title text-center">Wrong File Type</h1>
-              </div>
-                
-              <div class="modal-body" id="error-upload-modal-body">
-                <h2 class="text-center"><i class="fa fa-times-circle fa-4x green" aria-hidden="true"></i></h2>
-                <p class="text-center" style="font-size: x-large;">Thanks for your participation and valuable input! <br> You should receive an email shortly.</p>
-              </div>
-              <div class="modal-footer" id="success-modal-footer">
-                <button type="button" class="btn btn-default" id="success-close" data-dismiss="modal">Close</button>
-                
-              </div>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+       <div  class="modal fade" role="dialog" id="error-upload-modal">
+         <div class="modal-dialog">
+
+           <!-- Modal content-->
+           <div class="modal-content">
+             <div class="modal-header red">               
+               <h1 class="modal-title text-center white-text">File Upload Error</h1>
+             </div>
+             <div class="modal-body" id="error-upload-body">
+               <h2 class="text-center"><i class="fa fa-times-circle fa-4x red-text" aria-hidden="true"></i></h2>
+               <p class="text-center" style="font-size: x-large;">Sorry, only Microsoft Powerpoint files can be uploaded. Please try again.</p>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             </div>
+           </div>
+         </div>
+       </div>
 
               
 

@@ -150,6 +150,18 @@ font-family: 'Fjalla One', sans-serif;
     color: #44c767;
 }
 
+.red{
+    background-color: #c0392b;
+}
+
+.white-text{
+    color: #fff;
+}
+
+.red-text{
+    color: #c0392b;
+}
+
 
 
 #movingBallG{
