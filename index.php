@@ -82,7 +82,7 @@
                             <div class="col-md-12">
                                 <div class="bs-callout-white text-left">
                                     <h4>SUPPORTING INFORMATION</h4> 
-                                    <p>Include any data you may have to support your idea. Attach a PowerPoint if applicable. <br /><input type="file"></p> 
+                                    <p>Include any data you may have to support your idea. Attach a PowerPoint if applicable. <br /><input type="file" id="uploadFile" name="uploadFile" accept=".pptx" /></p> 
                                     <div class="form-group">                                     
                                         <div class="proposal-entry">
                                             <textarea class="form-control" id="inputInformation" name="information" rows="5" maxlength="350"></textarea>
@@ -172,6 +172,25 @@
               </div>  
               <div class="modal-body" id="success-modal-body">
                 <h2 class="text-center"><i class="fa fa-check-circle fa-4x green" aria-hidden="true"></i></h2>
+                <p class="text-center" style="font-size: x-large;">Thanks for your participation and valuable input! <br> You should receive an email shortly.</p>
+              </div>
+              <div class="modal-footer" id="success-modal-footer">
+                <button type="button" class="btn btn-default" id="success-close" data-dismiss="modal">Close</button>
+                
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="error-upload-modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header" id="error-upload-modal-header">                
+                <h1 class="modal-title text-center">Wrong File Type</h1>
+              </div>
+                
+              <div class="modal-body" id="error-upload-modal-body">
+                <h2 class="text-center"><i class="fa fa-times-circle fa-4x green" aria-hidden="true"></i></h2>
                 <p class="text-center" style="font-size: x-large;">Thanks for your participation and valuable input! <br> You should receive an email shortly.</p>
               </div>
               <div class="modal-footer" id="success-modal-footer">

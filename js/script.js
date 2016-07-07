@@ -72,6 +72,23 @@ $(document).ready(function() {
 	    $("#countResource").html("Remaining characters : " +(350 - this.value.length));
 	});
 
+	//Validate Upload Extension
+	$('input[type=file]').change(function(e){
+	  var ext = $('input[type=file]').val().split('.').pop().toLowerCase();
+	  if($.inArray(ext, ['pptx', 'ppt']) == -1) {
+	    	alert('invalid extension!');
+	    	setTimeout(function(){
+	    	  $('input[type=file]').val('');
+	    	}, 500);
+	  }
+	  
+	  
+	});
+	
+	
+	
+
+
 	/*SUBMIT FORM*/
 	$('#submitBtn').click(function(e){
 		e.preventDefault();
