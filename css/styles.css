@@ -17,16 +17,16 @@ font-family: 'Fjalla One', sans-serif;
 }
 
 .form-border{
-	background: url('http://cdn1.bestpsdfreebies.com/wp-content/uploads/2014/05/Hexagon-3.jpg');
-	margin-top: 20px;
-	-webkit-box-shadow: 0px 9px 10px 0px rgba(50, 50, 50, 0.75);
+    background: url('http://cdn1.bestpsdfreebies.com/wp-content/uploads/2014/05/Hexagon-3.jpg');
+    margin-top: 20px;
+    -webkit-box-shadow: 0px 9px 10px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    0px 9px 10px 0px rgba(50, 50, 50, 0.75);
   box-shadow:         0px 9px 10px 0px rgba(50, 50, 50, 0.75);
 
 }
 
 .proposal-entry{
-	margin: 0 10px;
+    margin: 0 10px;
 }
 
 .bs-callout {
@@ -87,40 +87,40 @@ font-family: 'Fjalla One', sans-serif;
 }
 
 .bs-callout-white, .bs-callout-white h4, .bs-callout-white p{
-	color: #fff;
+    color: #fff;
 }
 
 .bs-callout-white{
-	border-bottom: 2px dashed #fff;
+    border-bottom: 2px dashed #fff;
 }
 
 
 
 #submitButton {
-	background-color:#44c767;
-	-moz-border-radius:7px;
-	-webkit-border-radius:7px;
-	border-radius:7px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:20px;
-	padding:10px 45px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
+    background-color:#44c767;
+    -moz-border-radius:7px;
+    -webkit-border-radius:7px;
+    border-radius:7px;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:20px;
+    padding:10px 45px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
 }
 #submitButton:hover {
-	background-color:#5cbf2a;
+    background-color:#5cbf2a;
 }
 #submitButton:active {
-	position:relative;
-	top:1px;
+    position:relative;
+    top:1px;
 }
 
-.modal-body
+#success-modal-header, #success-modal-body, #success-modal-footer
 {
-    background-color: #FFFFFF;
+    
     display:none;
 }
 
@@ -150,3 +150,142 @@ font-family: 'Fjalla One', sans-serif;
     color: #44c767;
 }
 
+
+
+#movingBallG{
+    position:relative;
+    width:250px;
+    height:19px;
+    margin:auto;
+}
+
+.movingBallLineG{
+    position:absolute;
+    left:0px;
+    top:8px;
+    height:4px;
+    width:250px;
+    background-color:rgb(70,190,170);
+}
+
+.movingBallG{
+    background-color:rgb(255,200,0);
+    position:absolute;
+    top:0;
+    left:0;
+    width:19px;
+    height:19px;
+    border-radius:10px;
+        -o-border-radius:10px;
+        -ms-border-radius:10px;
+        -webkit-border-radius:10px;
+        -moz-border-radius:10px;
+    animation-name:bounce_movingBallG;
+        -o-animation-name:bounce_movingBallG;
+        -ms-animation-name:bounce_movingBallG;
+        -webkit-animation-name:bounce_movingBallG;
+        -moz-animation-name:bounce_movingBallG;
+    animation-duration:1.5s;
+        -o-animation-duration:1.5s;
+        -ms-animation-duration:1.5s;
+        -webkit-animation-duration:1.5s;
+        -moz-animation-duration:1.5s;
+    animation-iteration-count:infinite;
+        -o-animation-iteration-count:infinite;
+        -ms-animation-iteration-count:infinite;
+        -webkit-animation-iteration-count:infinite;
+        -moz-animation-iteration-count:infinite;
+    animation-direction:normal;
+        -o-animation-direction:normal;
+        -ms-animation-direction:normal;
+        -webkit-animation-direction:normal;
+        -moz-animation-direction:normal;
+}
+
+
+
+@keyframes bounce_movingBallG{
+    0%{
+        left:0px;
+    }
+
+    50%{
+        left:230px;
+    }
+
+    100%{
+        left:0px;
+    }
+}
+
+@-o-keyframes bounce_movingBallG{
+    0%{
+        left:0px;
+    }
+
+    50%{
+        left:230px;
+    }
+
+    100%{
+        left:0px;
+    }
+}
+
+@-ms-keyframes bounce_movingBallG{
+    0%{
+        left:0px;
+    }
+
+    50%{
+        left:230px;
+    }
+
+    100%{
+        left:0px;
+    }
+}
+
+@-webkit-keyframes bounce_movingBallG{
+    0%{
+        left:0px;
+    }
+
+    50%{
+        left:230px;
+    }
+
+    100%{
+        left:0px;
+    }
+}
+
+@-moz-keyframes bounce_movingBallG{
+    0%{
+        left:0px;
+    }
+
+    50%{
+        left:230px;
+    }
+
+    100%{
+        left:0px;
+    }
+}
+
+.error{
+    border-color: #c0392b;
+    -webkit-box-shadow: 0px -1px 9px -1px rgba(255, 0, 9, 0.75);
+    -moz-box-shadow:    0px -1px 9px -1px rgba(255, 0, 9, 0.75);
+    box-shadow:         0px -1px 9px -1px rgba(255, 0, 9, 0.75);
+}
+
+[id*="error"] {
+   padding-top: 3px;
+    background: none;
+    box-shadow: none;
+    color:#c0392b;
+    float: left;
+    font-weight: normal;
+}
