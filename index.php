@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12 text-center"><img src="images/think-tank-small.png" class="img-responsive text-center" alt="" style="margin: 0 auto;"></div>
-                        <form class="form-horizontal" name="thinkTank" id="thinkTank" style="color:#fff;" enctype="mulitpart/form-data">
+                        <form class="form-horizontal"  name="thinkTank" id="thinkTank" style="color:#fff;" method="post" enctype="multipart/form-data" >
                             <div class="col-md-8 text-right" style="margin-top:20px;">
                             
                                 <div class="form-group" style="color:#fff;">
@@ -64,7 +64,7 @@
                                 </div>                                                   
                             </div>
                         </div>
-                    <div class="row form-border">
+                        <div class="row form-border">
                             <div class="col-md-12">
                                 <div class="bs-callout-white text-left">
                                     <h4>THINK TANK PROPOSAL</h4> 
@@ -83,7 +83,10 @@
                                 <div class="bs-callout-white text-left">
                                     <h4>SUPPORTING INFORMATION</h4> 
                                     <p>Include any data you may have to support your idea. Attach a PowerPoint if applicable. <br />
-                                    <input type="file" id="uploadFile" name="uploadFile" accept=".pptx" /></p> 
+                                    <div class="form-group">
+                                      <input type="file" id="uploadFile" name="uploadFile" accept=".pptx" />  
+                                    </div>
+                                    </p> 
                                     <div class="form-group">                                     
                                         <div class="proposal-entry">
                                             <textarea class="form-control" id="inputInformation" name="information" rows="5" maxlength="350"></textarea>

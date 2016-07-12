@@ -109,8 +109,7 @@ $(document).ready(function() {
 
 			$('#success-modal').modal('show');
 			$.post("test-file.php",$('#thinkTank').serializeArray(),function(data){
-				var success = '1 row inserted';
-						
+				var success = '1 row inserted';				
 				console.log(data);
 				if(data.indexOf(success) != -1){
 					$('#loading-modal-body').hide('slow');

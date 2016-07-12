@@ -7,8 +7,8 @@ define('DS','/');
 
 // Report simple running errors
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
 ini_set("error_log", "/log/log.txt");
+
 global $dbh;
 
 	// CHECK IF EMAIL IS SET
@@ -28,8 +28,11 @@ global $dbh;
 		$id = NULL;
 		$employee = $_POST["employee"];
 		
+		if(!isset($_FILES['uploadFile']['name'])){
+			echo 'File Not Found';
+		}
 
-		//form constants
+		//form committee
 		//$think_tank_email = array('ctorres@bmgl.com', 'margaris@bcm.edu','Loraine.whited@bcm.edu', 'richard.peterson@bcm.edu');
 		
 
@@ -337,13 +340,13 @@ global $dbh;
 			';		
 			$headers  = 'MIME-Version: 1.0' . "\r\n";
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";			
-			$headers .= 'From: BMGL Think Tank Commitee <donotreply@bcm.edu>' . "\r\n";			
+			$headers .= 'From: BMGL Think Tank Commitee <donotreply@bcm.edu>' . "\r\n";		
+
 			if( mail($to, $subject, $message, $headers) ){
 				echo 'Mail sent successfully to Think Tank Recipient'.'<br>';
 			} else{
 				echo 'Error sending mail to Think Tank Recipient';
 			}
-
 
 			$mail = new PHPMailer;
 
@@ -351,6 +354,7 @@ global $dbh;
 			$mail->FromName = $employee;
 
 			$mail->AddAddress('richard.peterson@bcm.edu');
+			$mail->AddAddress('rpetersonbcm@gmail.com');
 			$mail->AddAddress('rpetersonbcm@gmail.com');
 			
 
