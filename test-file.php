@@ -256,7 +256,7 @@ global $dbh;
 				                          <tr>
 				                            <td style="color:#fff;">
 				                            <br>
-				                             <p>We have recevied your Think Tank submission! You will be contacted by Cynthia Torres for an appointment with Gary.</p>
+				                             <p>We have receivied your Think Tank submission! You will be contacted by Cynthia Torres for an appointment with Gary.</p>
 				                            <br>
 											<p>For more information contact Loraine Whited at lwhited@bmgl.com</p>
 				                            <br>
@@ -321,7 +321,7 @@ global $dbh;
 			$mail = new PHPMailer;
 
 			$mail->From = $email;
-			$mail->FromName = $email;
+			$mail->FromName = $employee;
 
 			$mail->addAddress($think_tank_email, "Think Tank Committee");
 
