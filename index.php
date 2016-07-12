@@ -82,7 +82,8 @@
                             <div class="col-md-12">
                                 <div class="bs-callout-white text-left">
                                     <h4>SUPPORTING INFORMATION</h4> 
-                                    <p>Include any data you may have to support your idea. Attach a PowerPoint if applicable. <br /><input type="file" id="uploadFile" name="uploadFile" accept=".pptx" /></p> 
+                                    <p>Include any data you may have to support your idea. Attach a PowerPoint if applicable. <br />
+                                    <input type="file" id="uploadFile" name="uploadFile" accept=".pptx" /></p> 
                                     <div class="form-group">                                     
                                         <div class="proposal-entry">
                                             <textarea class="form-control" id="inputInformation" name="information" rows="5" maxlength="350"></textarea>
@@ -199,8 +200,7 @@
        
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.validate.js"></script>
-        <script src="js/bootstrap.min.js"></script> 
-        <script src="js/circle-progress.js"></script>        
+        <script src="js/bootstrap.min.js"></script>        
         <script src="js/script.js"></script>
 
 

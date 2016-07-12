@@ -4,11 +4,17 @@ require('includes/fpdf.php');
 require_once ('phpMailer/PHPMailerAutoload.php');
 date_default_timezone_set('America/Monterrey');
 define('DS','/');
+
+// Report simple running errors
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
+ini_set("error_log", "/log/log.txt");
 global $dbh;
 
-
+	// CHECK IF EMAIL IS SET
 	if($_POST["email"])
 	{
+		//email inputs
 		$proposal = $_POST["proposal"];
 		$employee = $_POST["employee"];
 		$department = $_POST["department"];
@@ -21,14 +27,29 @@ global $dbh;
 		$resource = $_POST["resource"];
 		$id = NULL;
 		$employee = $_POST["employee"];
-		$think_tank_email = "richard.peterson@bcm.edu";
+		
+
+		//form constants
+		//$think_tank_email = array('ctorres@bmgl.com', 'margaris@bcm.edu','Loraine.whited@bcm.edu', 'richard.peterson@bcm.edu');
+		
+
+		
+		
+		print_r($think_tank_email1);
+
 		$year = date('Y');
 		$date = date('mdy');
+
+		// file directories
 		$dir = 'pdfs'.DS;
 		$filename = $employee.$date.'.pdf';
+		
+
+		//logos
 		$logo = 'images/bmgl_Logo.png';
 		$think_logo = 'images/think-tank-small.png';
 		
+		//add parenthesis and number if pdf already exists
 		$i = 1;
 		while (file_exists($dir.$filename)) {
 		        $parts = explode('.', $filename);
@@ -43,6 +64,7 @@ global $dbh;
 		        $i++;
 		}
 
+		//insert data into database
 		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
 		$stmt = $dbh->prepare($sql);
 		
@@ -50,8 +72,13 @@ global $dbh;
 								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){
 
 
-			//////////////////////////////////////////////////////////////CREATE PDF FILE
+		
 
+
+
+			/*CREATE PDF FILE*/
+			
+			//Create Page Number for PDF
 			class PDF extends FPDF
 			{
 			function Footer()
@@ -256,7 +283,7 @@ global $dbh;
 				                          <tr>
 				                            <td style="color:#fff;">
 				                            <br>
-				                             <p>We have receivied your Think Tank submission! You will be contacted by Cynthia Torres for an appointment with Gary.</p>
+				                             <p>We have received your Think Tank submission! You will be contacted by Cynthia Torres for an appointment with Gary.</p>
 				                            <br>
 											<p>For more information contact Loraine Whited at lwhited@bmgl.com</p>
 				                            <br>
@@ -323,11 +350,14 @@ global $dbh;
 			$mail->From = $email;
 			$mail->FromName = $employee;
 
-			$mail->addAddress($think_tank_email, "Think Tank Committee");
+			$mail->AddAddress('richard.peterson@bcm.edu');
+			$mail->AddAddress('rpetersonbcm@gmail.com');
+			
 
 			//Provide file path and name of the attachments
 			       
 			$mail->addAttachment($dir.$filename); //Filename is optional
+			
 
 			$mail->isHTML(true);
 
