@@ -29,7 +29,7 @@ global $dbh;
 		$employee = $_POST["employee"];
 		
 		if(!isset($_FILES['uploadFile']['name'])){
-			echo 'File Not Found';
+			echo 'File Not Found '."\r\n";
 		}
 
 		//form committee
@@ -49,7 +49,7 @@ global $dbh;
 		
 
 		//logos
-		$logo = 'images/bmgl_Logo.png';
+		$logo = 'images/bgl-logo.png';
 		$think_logo = 'images/think-tank-small.png';
 		
 		//add parenthesis and number if pdf already exists
@@ -349,19 +349,15 @@ global $dbh;
 			}
 
 			$mail = new PHPMailer;
-
 			$mail->From = $email;
 			$mail->FromName = $employee;
-
 			$mail->AddAddress('richard.peterson@bcm.edu');
-			$mail->AddAddress('rpetersonbcm@gmail.com');
-			$mail->AddAddress('rpetersonbcm@gmail.com');
+			//$mail->AddAddress('rpetersonbcm@gmail.com');
+			//$mail->AddAddress('rpetersonbcm@gmail.com');
 			
-
 			//Provide file path and name of the attachments
 			       
-			$mail->addAttachment($dir.$filename); //Filename is optional
-			
+			$mail->addAttachment($dir.$filename); //Filename is optional		
 
 			$mail->isHTML(true);
 
