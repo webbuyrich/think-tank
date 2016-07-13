@@ -81,13 +81,15 @@ $(document).ready(function() {
 	    	  $('input[type=file]').val('');
 	    	}, 500);
 	  } else{
-
-	  }
-	  
-	  
+	  	$('.fileButton').css('display', 'inline');
+	  }	  
 	});
 	
-	
+	//Remove selected file
+	$('.fileButton').click(function(){
+		$('input[type=file]').val('');
+		$('.fileButton').css('display', 'none');
+	});
 	
 
 

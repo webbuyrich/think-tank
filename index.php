@@ -84,7 +84,7 @@
                                     <h4>SUPPORTING INFORMATION</h4> 
                                     <p>Include any data you may have to support your idea. Attach a PowerPoint if applicable. <br />
                                     <div class="form-group">
-                                      <input type="file" id="uploadFile" name="uploadFile" accept=".pptx" />  
+                                      <input type="file" class='fileInput' id="uploadFile" name="uploadFile" accept=".pptx" /><button type="button" class="fileButton btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                                     </div>
                                     </p> 
                                     <div class="form-group">                                     

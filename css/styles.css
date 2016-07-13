@@ -301,3 +301,19 @@ font-family: 'Fjalla One', sans-serif;
     float: left;
     font-weight: normal;
 }
+
+.fileButton{
+    display:none;
+}
+.fileInput{
+    display:inline!important;
+}
+
+
+
+
+
+input[type=file] {
+   
+    width: 20%;
+}
