@@ -99,7 +99,7 @@
                             <div class="col-md-12">
                                 <div class="bs-callout-white text-left">
                                     <h4>PROPOSAL COSTS</h4> 
-                                    <p>How your idea is different than anything currently on the market or currently being practiced.</p> 
+                                    <p>Provide high-level estimates if known.</p> 
                                     <div class="form-group">                                     
                                         <div class="proposal-entry">
                                             <textarea class="form-control" id="inputCosts" name="cost" rows="5" maxlength="350"></textarea>
@@ -144,6 +144,7 @@
                             <div class="text-left" style="margin-bottom: 15px;">                        
                                 <a href="" role="button" id="submitBtn" class="btn btn-success">Submit</a>
                                 <a href="" role="button" id="cancelBtn" class="btn btn-danger">Cancel</a>
+                                <span class="pull-right" style="margin-bottom:5px;"> <img src="images/bgl-logo.png" alt=""></span>
                             </div> 
                         </div>                     
                     </div>

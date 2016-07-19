@@ -1,9 +1,10 @@
 <?php
-include('includes/conn.php');
+//include('includes/conn.php');
 require('includes/fpdf.php');
 require_once ('phpMailer/PHPMailerAutoload.php');
 date_default_timezone_set('America/Monterrey');
 define('DS','/');
+<<<<<<< HEAD
 
 // Report simple running errors
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
@@ -11,6 +12,20 @@ ini_set("error_log", "/log/log.txt");
 
 global $dbh;
 
+=======
+define('UPLOAD_DIR', 'uploads/');
+
+// Report simple running errors
+ini_set('error_reporting', E_ALL);
+error_reporting(E_ALL);
+ini_set('log_errors',TRUE);
+ini_set('html_errors',FALSE);
+ini_set('error_log','logs/log.txt');
+ini_set('display_errors',FALSE);
+
+//global $dbh;
+
+>>>>>>> master
 	// CHECK IF EMAIL IS SET
 	if($_POST["email"])
 	{
@@ -28,9 +43,47 @@ global $dbh;
 		$id = NULL;
 		$employee = $_POST["employee"];
 		
+<<<<<<< HEAD
 		if(!isset($_FILES['uploadFile']['name'])){
 			echo 'File Not Found '."\r\n";
 		}
+=======
+		//CHECK IF FILE HAS BEEN UPLOADED
+		if (!empty($_FILES['uploadFile'])) {
+            $myFile = $_FILES['uploadFile'];
+
+            if ($myFile["error"] !== UPLOAD_ERR_OK) {
+                echo "error";
+                exit;
+            }
+
+            // ensure a safe filename
+            $name = preg_replace("/[^A-Z0-9._-]/i", "_", $myFile["name"]);
+
+            // don't overwrite an existing file
+            $i = 0;
+            $parts = pathinfo($name);
+            while (file_exists(UPLOAD_DIR . $name)) {
+                $i++;
+                $name = $parts["filename"] . "-" . $i . "." . $parts["extension"];
+            }
+
+            // preserve file from temporary directory
+            $success = move_uploaded_file($myFile["tmp_name"],
+                UPLOAD_DIR . $name);
+            if (!$success) { 
+                echo "error";
+                exit;
+            } else{
+                echo 'File Save Success!';
+            }
+
+            // set proper permissions on the new file
+            chmod(UPLOAD_DIR . $name, 0644);
+        } else {
+        	echo " FILE error";
+        }
+>>>>>>> master
 
 		//form committee
 		//$think_tank_email = array('ctorres@bmgl.com', 'margaris@bcm.edu','Loraine.whited@bcm.edu', 'richard.peterson@bcm.edu');
@@ -38,7 +91,11 @@ global $dbh;
 
 		
 		
+<<<<<<< HEAD
 		print_r($think_tank_email1);
+=======
+		
+>>>>>>> master
 
 		$year = date('Y');
 		$date = date('mdy');
@@ -67,32 +124,42 @@ global $dbh;
 		        $i++;
 		}
 
+<<<<<<< HEAD
 		//insert data into database
+=======
+		/*insert data into database
+>>>>>>> master
 		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
-		$stmt = $dbh->prepare($sql);
+		$stmt = $dbh->prepare($sql);*/
 		
-		if($stmt->execute(array(':id'=>null, ':employee'=>$employee, ':department'=>$department, ':jobTitle'=>$jobTitle, ':email'=> $email, ':reason'=>$reason, ':information'=>$information, 
-								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){
+		/*if($stmt->execute(array(':id'=>null, ':employee'=>$employee, ':department'=>$department, ':jobTitle'=>$jobTitle, ':email'=> $email, ':reason'=>$reason, ':information'=>$information, 
+								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){*/
 
 
 		
 
 
+<<<<<<< HEAD
+		
+
+
+=======
+>>>>>>> master
 
 			/*CREATE PDF FILE*/
 			
 			//Create Page Number for PDF
 			class PDF extends FPDF
 			{
-			function Footer()
-			{
-			    // Go to 1.5 cm from bottom
-			    $this->SetY(-15);
-			    // Select Arial italic 8
-			    $this->SetFont('Arial','I',8);
-			    // Print centered page number
-			    $this->Cell(0,10,'Page '.$this->PageNo(),0,0,'C');
-			}
+				function Footer()
+				{
+				    // Go to 1.5 cm from bottom
+				    $this->SetY(-15);
+				    // Select Arial italic 8
+				    $this->SetFont('Arial','I',8);
+				    // Print centered page number
+				    $this->Cell(0,10,'Page '.$this->PageNo(),0,0,'C');
+				}
 			}
 
 
@@ -315,7 +382,7 @@ global $dbh;
 				                  </tr>
 				                  <tr>
 				                    <td style="color:#bbbbbb; font-size:12px;">
-				                      <img src="http://bmgl.com/skin/frontend/ultimo/bmgl/images/BaylorMiraca.png" height="52" width="152" alt="">
+				                      <img src="http://bmgl.com/skin/frontend/ultimo/bmgl/images/BaylorGenetics.png" height="52" width="152" alt="">
 				                      <br><br>
 				                    </td>
 				                  </tr>
@@ -343,9 +410,9 @@ global $dbh;
 			$headers .= 'From: BMGL Think Tank Commitee <donotreply@bcm.edu>' . "\r\n";		
 
 			if( mail($to, $subject, $message, $headers) ){
-				echo 'Mail sent successfully to Think Tank Recipient'.'<br>';
+				echo 'Confirmation Success!'."\r\n";
 			} else{
-				echo 'Error sending mail to Think Tank Recipient';
+				echo 'error';
 			}
 
 			$mail = new PHPMailer;
@@ -357,7 +424,14 @@ global $dbh;
 			
 			//Provide file path and name of the attachments
 			       
+<<<<<<< HEAD
 			$mail->addAttachment($dir.$filename); //Filename is optional		
+=======
+			$mail->addAttachment($dir.$filename); //Filename is optional
+			if($success){
+				$mail->addAttachment(UPLOAD_DIR . $name);
+			}		
+>>>>>>> master
 
 			$mail->isHTML(true);
 
@@ -533,7 +607,7 @@ global $dbh;
 				                  </tr>
 				                  <tr>
 				                    <td style="color:#bbbbbb; font-size:12px;">
-				                       <img src="http://bmgl.com/skin/frontend/ultimo/bmgl/images/BaylorMiraca.png" height="52" width="152" alt="">
+				                       <img src="http://bmgl.com/skin/frontend/ultimo/bmgl/images/BaylorGenetics.png" height="52" width="152" alt="">
 				                      <br><br>
 				                    </td>
 				                  </tr>
@@ -559,25 +633,24 @@ global $dbh;
 
 			if(!$mail->send()) 
 			{
-			    echo "Mailer Error: " . $mail->ErrorInfo;
+			    echo "error";
 			} 
 			else 
 			{
-			    echo "Message has been sent successfully";
+			    echo "Submission Success!";
 			}
 
 			//////////////////////////////////////////////////////////////END SEND EMAILS		
 			
-			// SEND MESSAGE BACK TO SCRIPT.JS TO SHOW MODAL
-			echo '1 row inserted';		
+			/*// SEND MESSAGE BACK TO SCRIPT.JS TO SHOW MODAL
+			echo '1 row inserted';	*/	
 		} else{
-			echo 'There was an error';
+			echo 'error';
 		}
 	
 
 
-	// Here, you can also perform some database query operations with above values.
-	}
+	
 
 
 
