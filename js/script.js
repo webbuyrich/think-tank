@@ -131,14 +131,14 @@ $(document).ready(function() {
 			            	{
 			            				            		
 			            		
-		    						$('#loading-modal-body').hide('slow');
-		    						$('#success-modal-header, #success-modal-body, #success-modal-footer').show('slow');
-		    						$('#count[*]').hide();
-		    						setTimeout(function(){
-		    						  $('#thinkTank')[0].reset();
-		    						  $('.fileButton').css('display', 'none');
-		    						}, 2500);
-			    					console.log(response);
+	    						$('#loading-modal-body').hide('slow');
+	    						$('#success-modal-header, #success-modal-body, #success-modal-footer').show('slow');
+	    						$('#count[*]').hide();
+	    						setTimeout(function(){
+	    						  $('#thinkTank')[0].reset();
+	    						  $('.fileButton').css('display', 'none');
+	    						}, 2500);
+		    					console.log(response);
 		    					 
 		    				}
 		    	});	
