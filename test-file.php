@@ -4,22 +4,8 @@ require('includes/fpdf.php');
 require_once ('phpMailer/PHPMailerAutoload.php');
 date_default_timezone_set('America/Monterrey');
 define('DS','/');
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-// Report simple running errors
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-ini_set("error_log", "/log/log.txt");
-
-global $dbh;
-
-=======
 define('UPLOAD_DIR', 'uploads/');
 
-=======
-define('UPLOAD_DIR', 'uploads/');
-
->>>>>>> master
 // Report simple running errors
 ini_set('error_reporting', E_ALL);
 error_reporting(E_ALL);
@@ -27,16 +13,9 @@ ini_set('log_errors',TRUE);
 ini_set('html_errors',FALSE);
 ini_set('error_log','logs/log.txt');
 ini_set('display_errors',FALSE);
-<<<<<<< HEAD
 
 //global $dbh;
 
->>>>>>> master
-=======
-
-//global $dbh;
-
->>>>>>> master
 	// CHECK IF EMAIL IS SET
 	if($_POST["email"])
 	{
@@ -54,14 +33,6 @@ ini_set('display_errors',FALSE);
 		$id = NULL;
 		$employee = $_POST["employee"];
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		if(!isset($_FILES['uploadFile']['name'])){
-			echo 'File Not Found '."\r\n";
-		}
-=======
-=======
->>>>>>> master
 		//CHECK IF FILE HAS BEEN UPLOADED
 		if (!empty($_FILES['uploadFile'])) {
             $myFile = $_FILES['uploadFile'];
@@ -97,10 +68,6 @@ ini_set('display_errors',FALSE);
         } else {
         	echo " FILE error";
         }
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
 
 		//form committee
 		//$think_tank_email = array('ctorres@bmgl.com', 'margaris@bcm.edu','Loraine.whited@bcm.edu', 'richard.peterson@bcm.edu');
@@ -108,15 +75,7 @@ ini_set('display_errors',FALSE);
 
 		
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		print_r($think_tank_email1);
-=======
 		
->>>>>>> master
-=======
-		
->>>>>>> master
 
 		$year = date('Y');
 		$date = date('mdy');
@@ -145,30 +104,6 @@ ini_set('display_errors',FALSE);
 		        $i++;
 		}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-		//insert data into database
-=======
-		/*insert data into database
->>>>>>> master
-		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
-		$stmt = $dbh->prepare($sql);*/
-		
-		/*if($stmt->execute(array(':id'=>null, ':employee'=>$employee, ':department'=>$department, ':jobTitle'=>$jobTitle, ':email'=> $email, ':reason'=>$reason, ':information'=>$information, 
-								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){*/
-
-
-		
-
-
-<<<<<<< HEAD
-		
-
-
-=======
->>>>>>> master
-
-=======
 		/*insert data into database
 		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
 		$stmt = $dbh->prepare($sql);*/
@@ -181,7 +116,6 @@ ini_set('display_errors',FALSE);
 
 
 
->>>>>>> master
 			/*CREATE PDF FILE*/
 			
 			//Create Page Number for PDF
@@ -460,17 +394,10 @@ ini_set('display_errors',FALSE);
 			
 			//Provide file path and name of the attachments
 			       
-<<<<<<< HEAD
-			$mail->addAttachment($dir.$filename); //Filename is optional		
-=======
 			$mail->addAttachment($dir.$filename); //Filename is optional
 			if($success){
 				$mail->addAttachment(UPLOAD_DIR . $name);
 			}		
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
 
 			$mail->isHTML(true);
 
