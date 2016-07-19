@@ -5,6 +5,7 @@ require_once ('phpMailer/PHPMailerAutoload.php');
 date_default_timezone_set('America/Monterrey');
 define('DS','/');
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 // Report simple running errors
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
@@ -15,6 +16,10 @@ global $dbh;
 =======
 define('UPLOAD_DIR', 'uploads/');
 
+=======
+define('UPLOAD_DIR', 'uploads/');
+
+>>>>>>> master
 // Report simple running errors
 ini_set('error_reporting', E_ALL);
 error_reporting(E_ALL);
@@ -22,6 +27,12 @@ ini_set('log_errors',TRUE);
 ini_set('html_errors',FALSE);
 ini_set('error_log','logs/log.txt');
 ini_set('display_errors',FALSE);
+<<<<<<< HEAD
+
+//global $dbh;
+
+>>>>>>> master
+=======
 
 //global $dbh;
 
@@ -44,10 +55,13 @@ ini_set('display_errors',FALSE);
 		$employee = $_POST["employee"];
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(!isset($_FILES['uploadFile']['name'])){
 			echo 'File Not Found '."\r\n";
 		}
 =======
+=======
+>>>>>>> master
 		//CHECK IF FILE HAS BEEN UPLOADED
 		if (!empty($_FILES['uploadFile'])) {
             $myFile = $_FILES['uploadFile'];
@@ -83,6 +97,9 @@ ini_set('display_errors',FALSE);
         } else {
         	echo " FILE error";
         }
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 
 		//form committee
@@ -92,7 +109,11 @@ ini_set('display_errors',FALSE);
 		
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print_r($think_tank_email1);
+=======
+		
+>>>>>>> master
 =======
 		
 >>>>>>> master
@@ -125,6 +146,7 @@ ini_set('display_errors',FALSE);
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//insert data into database
 =======
 		/*insert data into database
@@ -146,6 +168,20 @@ ini_set('display_errors',FALSE);
 =======
 >>>>>>> master
 
+=======
+		/*insert data into database
+		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
+		$stmt = $dbh->prepare($sql);*/
+		
+		/*if($stmt->execute(array(':id'=>null, ':employee'=>$employee, ':department'=>$department, ':jobTitle'=>$jobTitle, ':email'=> $email, ':reason'=>$reason, ':information'=>$information, 
+								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){*/
+
+
+		
+
+
+
+>>>>>>> master
 			/*CREATE PDF FILE*/
 			
 			//Create Page Number for PDF
@@ -431,6 +467,9 @@ ini_set('display_errors',FALSE);
 			if($success){
 				$mail->addAttachment(UPLOAD_DIR . $name);
 			}		
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 
 			$mail->isHTML(true);
