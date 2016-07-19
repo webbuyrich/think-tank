@@ -1,16 +1,25 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 <?php
-include('includes/conn.php');
+//include('includes/conn.php');
 require('includes/fpdf.php');
 require_once ('phpMailer/PHPMailerAutoload.php');
 date_default_timezone_set('America/Monterrey');
 define('DS','/');
-global $dbh;
+define('UPLOAD_DIR', 'uploads/');
 
+// Report simple running errors
+ini_set('error_reporting', E_ALL);
+error_reporting(E_ALL);
+ini_set('log_errors',TRUE);
+ini_set('html_errors',FALSE);
+ini_set('error_log','logs/log.txt');
+ini_set('display_errors',FALSE);
 
+//global $dbh;
+
+	// CHECK IF EMAIL IS SET
 	if($_POST["email"])
 	{
+		//email inputs
 		$proposal = $_POST["proposal"];
 		$employee = $_POST["employee"];
 		$department = $_POST["department"];
@@ -23,14 +32,64 @@ global $dbh;
 		$resource = $_POST["resource"];
 		$id = NULL;
 		$employee = $_POST["employee"];
-		$think_tank_email = "richard.peterson@bcm.edu";
+		
+		//CHECK IF FILE HAS BEEN UPLOADED
+		if (!empty($_FILES['uploadFile'])) {
+            $myFile = $_FILES['uploadFile'];
+
+            if ($myFile["error"] !== UPLOAD_ERR_OK) {
+                echo "error";
+                exit;
+            }
+
+            // ensure a safe filename
+            $name = preg_replace("/[^A-Z0-9._-]/i", "_", $myFile["name"]);
+
+            // don't overwrite an existing file
+            $i = 0;
+            $parts = pathinfo($name);
+            while (file_exists(UPLOAD_DIR . $name)) {
+                $i++;
+                $name = $parts["filename"] . "-" . $i . "." . $parts["extension"];
+            }
+
+            // preserve file from temporary directory
+            $success = move_uploaded_file($myFile["tmp_name"],
+                UPLOAD_DIR . $name);
+            if (!$success) { 
+                echo "error";
+                exit;
+            } else{
+                echo 'File Save Success!';
+            }
+
+            // set proper permissions on the new file
+            chmod(UPLOAD_DIR . $name, 0644);
+        } else {
+        	echo " FILE error";
+        }
+
+		//form committee
+		//$think_tank_email = array('ctorres@bmgl.com', 'margaris@bcm.edu','Loraine.whited@bcm.edu', 'richard.peterson@bcm.edu');
+		
+
+		
+		
+		
+
 		$year = date('Y');
 		$date = date('mdy');
+
+		// file directories
 		$dir = 'pdfs'.DS;
 		$filename = $employee.$date.'.pdf';
-		$logo = 'images/bmgl_Logo.png';
+		
+
+		//logos
+		$logo = 'images/bgl-logo.png';
 		$think_logo = 'images/think-tank-small.png';
 		
+		//add parenthesis and number if pdf already exists
 		$i = 1;
 		while (file_exists($dir.$filename)) {
 		        $parts = explode('.', $filename);
@@ -45,26 +104,32 @@ global $dbh;
 		        $i++;
 		}
 
+		/*insert data into database
 		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
-		$stmt = $dbh->prepare($sql);
+		$stmt = $dbh->prepare($sql);*/
 		
-		if($stmt->execute(array(':id'=>null, ':employee'=>$employee, ':department'=>$department, ':jobTitle'=>$jobTitle, ':email'=> $email, ':reason'=>$reason, ':information'=>$information, 
-								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){
+		/*if($stmt->execute(array(':id'=>null, ':employee'=>$employee, ':department'=>$department, ':jobTitle'=>$jobTitle, ':email'=> $email, ':reason'=>$reason, ':information'=>$information, 
+								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){*/
 
 
-			//////////////////////////////////////////////////////////////CREATE PDF FILE
+		
 
+
+
+			/*CREATE PDF FILE*/
+			
+			//Create Page Number for PDF
 			class PDF extends FPDF
 			{
-			function Footer()
-			{
-			    // Go to 1.5 cm from bottom
-			    $this->SetY(-15);
-			    // Select Arial italic 8
-			    $this->SetFont('Arial','I',8);
-			    // Print centered page number
-			    $this->Cell(0,10,'Page '.$this->PageNo(),0,0,'C');
-			}
+				function Footer()
+				{
+				    // Go to 1.5 cm from bottom
+				    $this->SetY(-15);
+				    // Select Arial italic 8
+				    $this->SetFont('Arial','I',8);
+				    // Print centered page number
+				    $this->Cell(0,10,'Page '.$this->PageNo(),0,0,'C');
+				}
 			}
 
 
@@ -258,7 +323,7 @@ global $dbh;
 				                          <tr>
 				                            <td style="color:#fff;">
 				                            <br>
-				                             <p>We have recevied your Think Tank submission! You will be contacted by Cynthia Torres for an appointment with Gary.</p>
+				                             <p>We have received your Think Tank submission! You will be contacted by Cynthia Torres for an appointment with Gary.</p>
 				                            <br>
 											<p>For more information contact Loraine Whited at lwhited@bmgl.com</p>
 				                            <br>
@@ -287,7 +352,7 @@ global $dbh;
 				                  </tr>
 				                  <tr>
 				                    <td style="color:#bbbbbb; font-size:12px;">
-				                      <img src="http://bmgl.com/skin/frontend/ultimo/bmgl/images/BaylorMiraca.png" height="52" width="152" alt="">
+				                      <img src="http://bmgl.com/skin/frontend/ultimo/bmgl/images/BaylorGenetics.png" height="52" width="152" alt="">
 				                      <br><br>
 				                    </td>
 				                  </tr>
@@ -312,24 +377,27 @@ global $dbh;
 			';		
 			$headers  = 'MIME-Version: 1.0' . "\r\n";
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";			
-			$headers .= 'From: BMGL Think Tank Commitee <donotreply@bcm.edu>' . "\r\n";			
+			$headers .= 'From: BMGL Think Tank Commitee <donotreply@bcm.edu>' . "\r\n";		
+
 			if( mail($to, $subject, $message, $headers) ){
-				echo 'Mail sent successfully to Think Tank Recipient'.'<br>';
+				echo 'Confirmation Success!'."\r\n";
 			} else{
-				echo 'Error sending mail to Think Tank Recipient';
+				echo 'error';
 			}
 
-
 			$mail = new PHPMailer;
-
 			$mail->From = $email;
-			$mail->FromName = $email;
-
-			$mail->addAddress($think_tank_email, "Think Tank Committee");
-
+			$mail->FromName = $employee;
+			$mail->AddAddress('richard.peterson@bcm.edu');
+			//$mail->AddAddress('rpetersonbcm@gmail.com');
+			//$mail->AddAddress('rpetersonbcm@gmail.com');
+			
 			//Provide file path and name of the attachments
 			       
 			$mail->addAttachment($dir.$filename); //Filename is optional
+			if($success){
+				$mail->addAttachment(UPLOAD_DIR . $name);
+			}		
 
 			$mail->isHTML(true);
 
@@ -505,7 +573,7 @@ global $dbh;
 				                  </tr>
 				                  <tr>
 				                    <td style="color:#bbbbbb; font-size:12px;">
-				                       <img src="http://bmgl.com/skin/frontend/ultimo/bmgl/images/BaylorMiraca.png" height="52" width="152" alt="">
+				                       <img src="http://bmgl.com/skin/frontend/ultimo/bmgl/images/BaylorGenetics.png" height="52" width="152" alt="">
 				                      <br><br>
 				                    </td>
 				                  </tr>
@@ -531,180 +599,25 @@ global $dbh;
 
 			if(!$mail->send()) 
 			{
-			    echo "Mailer Error: " . $mail->ErrorInfo;
+			    echo "error";
 			} 
 			else 
 			{
-			    echo "Message has been sent successfully";
+			    echo "Submission Success!";
 			}
 
 			//////////////////////////////////////////////////////////////END SEND EMAILS		
 			
-			// SEND MESSAGE BACK TO SCRIPT.JS TO SHOW MODAL
-			echo '1 row inserted';		
+			/*// SEND MESSAGE BACK TO SCRIPT.JS TO SHOW MODAL
+			echo '1 row inserted';	*/	
 		} else{
-			echo 'There was an error';
+			echo 'error';
 		}
 	
 
 
-	// Here, you can also perform some database query operations with above values.
-	}
-
-
-
-=======
-<?php
-include('includes/conn.php');
-global $dbh;
-
-	if($_POST["email"])
-	{
-		$proposal = $_POST["proposal"];
-		$employee = $_POST["employee"];
-		$department = $_POST["department"];
-		$jobTitle = $_POST["jobTitle"];
-		$email = $_POST["email"];
-		$reason = $_POST["reason"];
-		$information = $_POST["information"];
-		$cost = $_POST["cost"];
-		$difference = $_POST["difference"];
-		$resource = $_POST["resource"];
-		$id = NULL;
-		$employee = $_POST["employee"];
-
-
-		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
-		$stmt = $dbh->prepare($sql);
-		
-		if($stmt->execute(array(':id'=>null, ':employee'=>$employee, ':department'=>$department, ':jobTitle'=>$jobTitle, ':email'=> $email, ':reason'=>$reason, ':information'=>$information, 
-								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){
-			
-			//////////////////////////////////////////////////////////////SEND EMAIL
-			
-			//recipient
-			$to = .$email;
-
-			// subject
-			$subject = 'Think Tank Submission Confirmation';
-
-			// message
-			$message = '
-			<html>
-			<head>
-			  <title>Think Tank Submission</title>
-			</head>
-			<body>
-			  <p>Dear '.$employee.',</p>
-			  <p>Thank you for unleashing your creativity and sharing your innovative ideas! To book your time with Gary, please contact Cynthia Torres at ctorres@bmgl.com. In the event 
-			  you need more information, please contact Loraine Whited at lwhited@bmgl.com.</p>			  
-			</body>
-			</html>
-			';
-
-			// To send HTML mail, the Content-type header must be set
-			$headers  = 'MIME-Version: 1.0' . "\r\n";
-			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-			// Additional headers
-			$headers .= 'To: '.$employee.' <'.$email.'>' . "\r\n";
-			$headers .= 'From: BMGL Think Tank Commitee <rpetersonbcm@gmail.com>' . "\r\n";
-			$headers .= 'Cc: rpetersonbcm@gmail.com' . "\r\n";
-			$headers .= 'Bcc: birthdaycheck@example.com' . "\r\n";
-
-			// Mail it
-			mail($to, $subject, $message, $headers);
-			//////////////////////////////////////////////////////////////SEND EMAIL
-
-
-
-			// SEND MESSAGE BACK TO SCRIPT.JS TO SHOW MODAL
-			echo '1 row inserted';		
-		} else{
-			echo 'There was an error';
-		}
 	
 
 
-	// Here, you can also perform some database query operations with above values.
-	}
 
->>>>>>> 3d9b5c6c0b5bcff09055d36915593f3609c3327b
-=======
-<?php
-include('includes/conn.php');
-global $dbh;
-
-	if($_POST["email"])
-	{
-		$proposal = $_POST["proposal"];
-		$employee = $_POST["employee"];
-		$department = $_POST["department"];
-		$jobTitle = $_POST["jobTitle"];
-		$email = $_POST["email"];
-		$reason = $_POST["reason"];
-		$information = $_POST["information"];
-		$cost = $_POST["cost"];
-		$difference = $_POST["difference"];
-		$resource = $_POST["resource"];
-		$id = NULL;
-		$employee = $_POST["employee"];
-
-
-		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
-		$stmt = $dbh->prepare($sql);
-		
-		if($stmt->execute(array(':id'=>null, ':employee'=>$employee, ':department'=>$department, ':jobTitle'=>$jobTitle, ':email'=> $email, ':reason'=>$reason, ':information'=>$information, 
-								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){
-			
-			//////////////////////////////////////////////////////////////SEND EMAIL
-			
-			//recipient
-			$to = .$email;
-
-			// subject
-			$subject = 'Think Tank Submission Confirmation';
-
-			// message
-			$message = '
-			<html>
-			<head>
-			  <title>Think Tank Submission</title>
-			</head>
-			<body>
-			  <p>Dear '.$employee.',</p>
-			  <p>Thank you for unleashing your creativity and sharing your innovative ideas! To book your time with Gary, please contact Cynthia Torres at ctorres@bmgl.com. In the event 
-			  you need more information, please contact Loraine Whited at lwhited@bmgl.com.</p>			  
-			</body>
-			</html>
-			';
-
-			// To send HTML mail, the Content-type header must be set
-			$headers  = 'MIME-Version: 1.0' . "\r\n";
-			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-			// Additional headers
-			$headers .= 'To: '.$employee.' <'.$email.'>' . "\r\n";
-			$headers .= 'From: BMGL Think Tank Commitee <rpetersonbcm@gmail.com>' . "\r\n";
-			$headers .= 'Cc: rpetersonbcm@gmail.com' . "\r\n";
-			$headers .= 'Bcc: birthdaycheck@example.com' . "\r\n";
-
-			// Mail it
-			mail($to, $subject, $message, $headers);
-			//////////////////////////////////////////////////////////////SEND EMAIL
-
-
-
-			// SEND MESSAGE BACK TO SCRIPT.JS TO SHOW MODAL
-			echo '1 row inserted';		
-		} else{
-			echo 'There was an error';
-		}
-	
-
-
-	// Here, you can also perform some database query operations with above values.
-	}
-
->>>>>>> 3d9b5c6c0b5bcff09055d36915593f3609c3327b
 ?>
