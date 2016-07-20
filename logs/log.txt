@@ -23,3 +23,18 @@ Stack trace:
 #5 /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php(111): FPDF->MultiCell(190, 10, '$pdf->Image($lo...', 0, 1)
 #6 {main}
   thrown in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/includes/fpdf.php on line 271
+[19-Jul-2016 00:11:33 America/Monterrey] PHP Notice:  Undefined variable: think_tank_email1 in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 76
+[19-Jul-2016 00:15:20 America/Monterrey] PHP Notice:  Undefined variable: think_tank_email1 in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 76
+[19-Jul-2016 00:17:20 America/Monterrey] PHP Notice:  Undefined variable: think_tank_email1 in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 76
+[19-Jul-2016 00:19:14 America/Monterrey] PHP Notice:  Undefined variable: think_tank_email1 in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 78
+[19-Jul-2016 00:29:17 America/Monterrey] PHP Warning:  move_uploaded_file(/uploads/test.pptx): failed to open stream: No such file or directory in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 58
+[19-Jul-2016 00:29:17 America/Monterrey] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/php0DTsrk' to '/uploads/test.pptx' in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 58
+[19-Jul-2016 01:15:06 America/Monterrey] PHP Warning:  chmod(): No such file or directory in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 67
+[19-Jul-2016 01:19:49 America/Monterrey] PHP Warning:  chmod(): No such file or directory in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 67
+[19-Jul-2016 10:32:19 America/Monterrey] PHP Notice:  Undefined variable: success in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 398
+[19-Jul-2016 10:39:16 America/Monterrey] PHP Notice:  Undefined variable: success in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 401
+[19-Jul-2016 12:45:24 America/Monterrey] PHP Notice:  Undefined variable: success in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 398
+[19-Jul-2016 14:25:42 America/New_York] PHP Fatal error:  Call to undefined method PHPMailer::setsFrom() in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test/mail.php on line 13
+[20-Jul-2016 09:01:54 America/Monterrey] PHP Notice:  Undefined variable: think_tank_email1 in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 113
+[20-Jul-2016 09:05:11 America/Monterrey] PHP Notice:  Undefined variable: think_tank_email1 in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 116
+[20-Jul-2016 09:07:14 America/Monterrey] PHP Notice:  Undefined variable: think_tank_email1 in /homepages/18/d389716498/htdocs/focusedandcreative/thinktank/test-file.php on line 114
