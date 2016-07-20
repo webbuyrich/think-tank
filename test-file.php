@@ -4,7 +4,6 @@ require('includes/fpdf.php');
 require_once ('phpMailer/PHPMailerAutoload.php');
 date_default_timezone_set('America/Monterrey');
 define('DS','/');
-<<<<<<< HEAD
 
 
 
@@ -14,17 +13,8 @@ ini_set("error_log", "/log/log.txt");
 
 global $dbh;
 
-
 define('UPLOAD_DIR', 'uploads/');
 
-
-define('UPLOAD_DIR', 'uploads/');
-
-
-=======
-define('UPLOAD_DIR', 'uploads/');
-
->>>>>>> 4adab9edc7af25e0ad582b0a428fb5240026b2ae
 // Report simple running errors
 ini_set('error_reporting', E_ALL);
 error_reporting(E_ALL);
@@ -32,7 +22,6 @@ ini_set('log_errors',TRUE);
 ini_set('html_errors',FALSE);
 ini_set('error_log','logs/log.txt');
 ini_set('display_errors',FALSE);
-<<<<<<< HEAD
 
 
 //global $dbh;
@@ -43,11 +32,6 @@ ini_set('display_errors',FALSE);
 //global $dbh;
 
 
-=======
-
-//global $dbh;
-
->>>>>>> 4adab9edc7af25e0ad582b0a428fb5240026b2ae
 	// CHECK IF EMAIL IS SET
 	if($_POST["email"])
 	{
@@ -65,7 +49,6 @@ ini_set('display_errors',FALSE);
 		$id = NULL;
 		$employee = $_POST["employee"];
 		
-<<<<<<< HEAD
 
 
 		
@@ -114,46 +97,6 @@ ini_set('display_errors',FALSE);
 
 
 
-=======
-		//CHECK IF FILE HAS BEEN UPLOADED
-		if(isset($_FILES['uploadFile'])){
-			if (!empty($_FILES['uploadFile'])) {
-	            $myFile = $_FILES['uploadFile'];
-
-	            if ($myFile["error"] !== UPLOAD_ERR_OK) {
-	                echo "error";
-	                exit;
-	            }
-
-	            // ensure a safe filename
-	            $name = preg_replace("/[^A-Z0-9._-]/i", "_", $myFile["name"]);
-
-	            // don't overwrite an existing file
-	            $i = 0;
-	            $parts = pathinfo($name);
-	            while (file_exists(UPLOAD_DIR . $name)) {
-	                $i++;
-	                $name = $parts["filename"] . "-" . $i . "." . $parts["extension"];
-	            }
-
-	            // preserve file from temporary directory
-	            $success = move_uploaded_file($myFile["tmp_name"],
-	                UPLOAD_DIR . $name);
-	            if (!$success) { 
-	                echo "error";
-	                exit;
-	            } else{
-	                echo 'File Save Success!';
-	            }
-
-	            // set proper permissions on the new file
-	            chmod(UPLOAD_DIR . $name, 0644);
-	        } else {
-	        	echo " FILE error";
-	        }
-		}
-		
->>>>>>> 4adab9edc7af25e0ad582b0a428fb5240026b2ae
 
 		//form committee
 		//$think_tank_email = array('ctorres@bmgl.com', 'margaris@bcm.edu','Loraine.whited@bcm.edu', 'richard.peterson@bcm.edu');
@@ -161,7 +104,6 @@ ini_set('display_errors',FALSE);
 
 		
 		
-<<<<<<< HEAD
 
 
 		print_r($think_tank_email1);
@@ -171,9 +113,6 @@ ini_set('display_errors',FALSE);
 
 		
 
-=======
-		
->>>>>>> 4adab9edc7af25e0ad582b0a428fb5240026b2ae
 
 		$year = date('Y');
 		$date = date('mdy');
@@ -202,7 +141,6 @@ ini_set('display_errors',FALSE);
 		        $i++;
 		}
 
-<<<<<<< HEAD
 
 
 		//insert data into database
@@ -227,8 +165,6 @@ ini_set('display_errors',FALSE);
 
 
 
-=======
->>>>>>> 4adab9edc7af25e0ad582b0a428fb5240026b2ae
 		/*insert data into database
 		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
 		$stmt = $dbh->prepare($sql);*/
@@ -241,10 +177,7 @@ ini_set('display_errors',FALSE);
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 4adab9edc7af25e0ad582b0a428fb5240026b2ae
 			/*CREATE PDF FILE*/
 			
 			//Create Page Number for PDF
@@ -523,12 +456,9 @@ ini_set('display_errors',FALSE);
 			
 			//Provide file path and name of the attachments
 			       
-<<<<<<< HEAD
 
 			$mail->addAttachment($dir.$filename); //Filename is optional		
 
-=======
->>>>>>> 4adab9edc7af25e0ad582b0a428fb5240026b2ae
 			$mail->addAttachment($dir.$filename); //Filename is optional
 			if(isset($success)){
 				if($success){
@@ -536,13 +466,10 @@ ini_set('display_errors',FALSE);
 				}
 				
 			}		
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> 4adab9edc7af25e0ad582b0a428fb5240026b2ae
 
 			$mail->isHTML(true);
 
