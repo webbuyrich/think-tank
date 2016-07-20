@@ -11,7 +11,7 @@ define('DS','/');
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ini_set("error_log", "/log/log.txt");
 
-global $dbh;
+//global $dbh;
 
 define('UPLOAD_DIR', 'uploads/');
 
@@ -93,27 +93,7 @@ ini_set('display_errors',FALSE);
 			        }
 		}
 			
-
-
-
-
-
-		//form committee
-		//$think_tank_email = array('ctorres@bmgl.com', 'margaris@bcm.edu','Loraine.whited@bcm.edu', 'richard.peterson@bcm.edu');
 		
-
-		
-		
-
-
-		print_r($think_tank_email1);
-
-		
-
-
-		
-
-
 		$year = date('Y');
 		$date = date('mdy');
 
@@ -154,16 +134,6 @@ ini_set('display_errors',FALSE);
 								':cost'=>$cost, ':resource'=>$resource, ':proposal'=>$proposal))){*/
 
 
-		
-
-
-
-		
-
-
-
-
-
 
 		/*insert data into database
 		$sql = "INSERT INTO `submissions` (id, employee, department, jobTitle, email, reason, information, cost, resource, proposal) VALUES (:id, :employee, :department, :jobTitle, :email, :reason, :information, :cost, :resource, :proposal)";
@@ -192,6 +162,61 @@ ini_set('display_errors',FALSE);
 				    // Print centered page number
 				    $this->Cell(0,10,'Page '.$this->PageNo(),0,0,'C');
 				}
+
+				function WriteText($text)
+				{
+				    $intPosIni = 0;
+				    $intPosFim = 0;
+				    if (strpos($text,'<')!==false && strpos($text,'[')!==false)
+				    {
+				        if (strpos($text,'<')<strpos($text,'['))
+				        {
+				            $this->Write(5,substr($text,0,strpos($text,'<')));
+				            $intPosIni = strpos($text,'<');
+				            $intPosFim = strpos($text,'>');
+				            $this->SetFont('','B');
+				            $this->Write(5,substr($text,$intPosIni+1,$intPosFim-$intPosIni-1));
+				            $this->SetFont('','');
+				            $this->WriteText(substr($text,$intPosFim+1,strlen($text)));
+				        }
+				        else
+				        {
+				            $this->Write(5,substr($text,0,strpos($text,'[')));
+				            $intPosIni = strpos($text,'[');
+				            $intPosFim = strpos($text,']');
+				            $w=$this->GetStringWidth('a')*($intPosFim-$intPosIni-1);
+				            $this->Cell($w,$this->FontSize+0.75,substr($text,$intPosIni+1,$intPosFim-$intPosIni-1),1,0,'');
+				            $this->WriteText(substr($text,$intPosFim+1,strlen($text)));
+				        }
+				    }
+				    else
+				    {
+				        if (strpos($text,'<')!==false)
+				        {
+				            $this->Write(5,substr($text,0,strpos($text,'<')));
+				            $intPosIni = strpos($text,'<');
+				            $intPosFim = strpos($text,'>');
+				            $this->SetFont('','B');
+				            $this->WriteText(substr($text,$intPosIni+1,$intPosFim-$intPosIni-1));
+				            $this->SetFont('','');
+				            $this->WriteText(substr($text,$intPosFim+1,strlen($text)));
+				        }
+				        elseif (strpos($text,'[')!==false)
+				        {
+				            $this->Write(5,substr($text,0,strpos($text,'[')));
+				            $intPosIni = strpos($text,'[');
+				            $intPosFim = strpos($text,']');
+				            $w=$this->GetStringWidth('a')*($intPosFim-$intPosIni-1);
+				            $this->Cell($w,$this->FontSize+0.75,substr($text,$intPosIni+1,$intPosFim-$intPosIni-1),1,0,'');
+				            $this->WriteText(substr($text,$intPosFim+1,strlen($text)));
+				        }
+				        else
+				        {
+				            $this->Write(5,$text);
+				        }
+
+				    }
+				}
 			}
 
 
@@ -215,25 +240,22 @@ ini_set('display_errors',FALSE);
 			$pdf->Cell(80,10, $email,0,1);
 			$pdf->Ln();			
 			$pdf->SetFont('Arial','B',10);
-			$pdf->Cell(50,10,'THINK TANK PROPOSAL',0,1);						
-			$pdf->SetFont('Arial','I',8);
-			$pdf->MultiCell(190,10, $reason,0,1);			
-			$pdf->SetFont('Arial','B',10);
-			$pdf->Cell(50,10,'SUPPORTING INFORMATION',0,1);
-			$pdf->SetFont('Arial','I',8);
-			$pdf->MultiCell(190,10, $information,0,1);
-			$pdf->SetFont('Arial','B',10);
-			$pdf->Cell(50,10,'PROPOSAL COSTS',0,1);
-			$pdf->SetFont('Arial','I',8);
-			$pdf->MultiCell(190,10, $cost,0,1);
-			$pdf->SetFont('Arial','B',10);
-			$pdf->Cell(50,10,'DIFFERENTIATOR',0,1);
-			$pdf->SetFont('Arial','I',8);
-			$pdf->MultiCell(190,10, $difference,0,1);
-			$pdf->SetFont('Arial','B',10);
-			$pdf->Cell(50,10,'RESOURCES NEEDED',0,1);
-			$pdf->SetFont('Arial','I',8);
-			$pdf->MultiCell(190,10, $resource,0,1);			
+			$ttfinal = "<THINK TANK PROPOSAL> - State the reasons this proposal is needed and what problem or issue the idea/project will resolve.\n\n";
+			$ttfinal .= $reason."\n\n";
+			$ttfinal .= "\n\n";
+			$ttfinal .= "<SUPPORTING INFORMATION> - Include any data you may have to support your idea.\n\n";
+			$ttfinal .= $information."\n\n";
+			$ttfinal .= "\n\n";
+			$ttfinal .= "<PROPOSAL COSTS> - Provide high-level estimates if known.\n\n";
+			$ttfinal .= $cost."\n\n";
+			$ttfinal .= "\n\n";
+			$ttfinal .= "<DIFFERENTIATOR> - How your idea is different than anything currently on the market or currently being practiced.\n\n";
+			$ttfinal .= $difference."\n\n";
+			$ttfinal .= "\n\n";
+			$ttfinal .= "<RESOURCES NEEDED> - List the resources that are required to support the idea.\n\n";
+			$ttfinal .= $resource."\n\n";
+			$ttfinal .= "\n\n";
+			$pdf->WriteText($ttfinal);			
 			$pdf->Output('pdfs/'.$filename, 'F');		
 			
 			////////////////////////////////////////////////////////////////CREATE PDF FILE	
